@@ -11,6 +11,27 @@ var my_news = [{
   text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000',
   bigText: 'На самом деле платно, просто нужно прочитать очень длинное лицензионное соглашение'
 }];
+var TestInput = React.createClass({
+
+  onBtnClickHandler: function() {
+    alert(ReactDOM.findDOMNode(this.refs.myTestInput).value);
+  },
+
+  render: function() {
+    return (
+      <div>
+        <input
+          className='test-input'
+          defaultValue=''
+          placeholder='введите значение'
+          ref='myTestInput'
+          />
+        <button onClick={this.onBtnClickHandler}>Показать alert</button>
+      </div>
+    );
+  }
+});
+
 var Article = React.createClass({
   propTypes: {
     data: React.PropTypes.shape({
@@ -33,6 +54,8 @@ var Article = React.createClass({
       text = this.props.data.text,
       bigText = this.props.data.bigText,
       visible = this.state.visible;
+
+    console.log('render',this);
     return (
       <div className='article'>
         <p className='news__author'>{author}:</p>
@@ -58,11 +81,11 @@ var News = React.createClass({
     } else {
       newsTemplate = <p>К сожалению новостей нет</p>
     }
+
     return (
       <div className='news'>
         {newsTemplate}
-        <strong className={'news__count ' + (data.length > 0 ? '':'none') }>Всего ново
-          стей: {data.length}</strong>
+        <strong className={'news__count ' + (data.length > 0 ? '':'none') }>Всего новостей: {data.length}</strong>
       </div>
     );
   }
@@ -72,6 +95,7 @@ var App = React.createClass({
     return (
       <div className='app'>
         <h3>Новости</h3>
+        <TestInput />
         <News data={my_news}/>
       </div>
     );

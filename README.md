@@ -6,4 +6,4 @@
  
  node server.js
  
- done - Продвинутое использование state
+ done - Uncontrolled Components (
